@@ -1,13 +1,16 @@
 a = 0
 b = 1
 i = 1
-print(a)
-print(b)
+seq = []
+seq.append(a)
+seq.append(b)
 while i < 10:
     c = a + b
     a = b
     b = c
-    print (c)
+    seq.append(c)
     i += 1
+print(seq)
+
 
 
