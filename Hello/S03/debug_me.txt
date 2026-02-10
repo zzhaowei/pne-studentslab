@@ -4,3 +4,5 @@ errors:
     the result of t1 is 0 (t1 = c-d = 3-3 = 0) and t0 / t1 is a zero division error
 
 both functions are functional
+this will happen anytime if c and d of the function f take the same value.
+that`s why the result 1, 3 and 4 is showed normally
