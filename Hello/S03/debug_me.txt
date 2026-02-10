@@ -3,4 +3,4 @@ errors:
     (<class 'ZeroDivisionError'>, ZeroDivisionError('division by zero'), <traceback object at 0x7dedf7509b40>)
     the result of t1 is 0 (t1 = c-d = 3-3 = 0) and t0 / t1 is a zero division error
 
-2.
+both functions are functional
