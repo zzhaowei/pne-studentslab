@@ -1,5 +1,8 @@
 from pathlib import Path
 
+FOLDER = "sequences/"
+type = ".fa"
+
 def seq_ping():
     print("OK")
 
@@ -13,12 +16,12 @@ def seq_read_fasta(file):
 def seq_len(files):
 
     for names in files:
-        genes = seq_read_fasta(names)
+        genes = seq_read_fasta(FOLDER + names + type)
         print("GENES: ",names , "--->  Lenghth: ", len(genes) )
 
 def seq_count_base(files, bases):
     for names in files:
-        genes = seq_read_fasta(names)
+        genes = seq_read_fasta(FOLDER + names + type)
         print(names)
         for base in bases:
             print("BASE:", base, "--->", genes.count(base), "times.")
@@ -26,7 +29,7 @@ def seq_count_base(files, bases):
 def seq_count(files, bases):
     dict = {}
     for names in files:
-        genes = seq_read_fasta(names)
+        genes = seq_read_fasta(FOLDER + names +  type)
         print(names)
         for base in bases:
             dict[base] = genes.count(base)
@@ -35,7 +38,7 @@ def seq_count(files, bases):
 def seq_count1(files, bases):
     dict = {}
     for names in files:
-        genes = seq_read_fasta(names)
+        genes = seq_read_fasta(FOLDER + names + type)
         dict[names] = {}
 
         for base in bases:
@@ -43,5 +46,21 @@ def seq_count1(files, bases):
 
 
     return dict
+
+def seq_reverse(seq, n):
+
+    reversed_n = seq[n-1 :: -1]
+    return  reversed_n
+
+def seq_complement(seq):
+
+    complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+
+    complement_seq = ""
+    for base in seq:
+        complement_seq += complement.get(base, base)
+
+    return complement_seq
+
 
 
