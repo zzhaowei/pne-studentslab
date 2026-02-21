@@ -10,7 +10,7 @@ def seq_ping():
 def seq_read_fasta(file):
     file_contents = Path(file).read_text()
     file_contents = file_contents.split("\n")
-    body = "\n".join(file_contents[1 : ])
+    body = "".join(file_contents[1 : ])
     return body
 
 def seq_len(files):
@@ -61,6 +61,16 @@ def seq_complement(seq):
         complement_seq += complement.get(base, base)
 
     return complement_seq
+
+def most_frequent_base(seq):
+
+    counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+    for base in seq:
+        if base in counts:
+            counts[base] += 1
+    most_frequent = max(counts, key=counts.get)
+    return most_frequent
+
 
 
 
