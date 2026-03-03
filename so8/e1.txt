@@ -1,0 +1,14 @@
+Machine /Interface /Date /Place/ IP
+
+
+
+
+mobile /Wifi / 3.3.2026/ urjc Fuenla L3208 /10.8.37.107
+
+
+
+
+Lab computer/ Wire/ 3.3.2026/ urjc fuenla L3208/ 212.128.255.95
+
+
+
