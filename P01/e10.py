@@ -1,16 +1,19 @@
+
 from Seq1 import Seq
+
 s1 = Seq()
 s2 = Seq()
 s3 = Seq()
 s4 = Seq()
 seq = [s1, s2, s3, s4]
-files = ["sequences/U5.fa", "sequences/ADA.fa", "sequences/FRAT1.fa", "sequences/FXN.fa"]
-for seqs in seq:
 
-    for filenames in files:
-        seqs.read_fasta(filenames)
+files = ["U5", "ADA", "FRAT1", "FXN"]
+Folder = "sequences/"
+file = ".fa"
 
-    print(f"Sequence: (Length:{seqs.len()}) {seqs}"
+for seqs, filenames in zip(seq, files):
+    seqs.read_fasta(Folder + filenames + file)
+
+    print(f"Gene: {filenames} (Length:{seqs.len()}) "
           f"\nBase: {seqs.count()}"
-          f"\nReverse: {seqs.rev()}"
-          f"\nComplement: {seqs.complement()}")
+          f"\nMost frequent bases: {seqs.most_frequent_base()}")

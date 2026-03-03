@@ -20,9 +20,6 @@ class Seq:
             print("Valid sequence created")
 
 
-
-
-
     def __str__(self):
         return self.strbases
 
