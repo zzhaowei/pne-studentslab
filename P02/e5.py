@@ -15,7 +15,7 @@ print(f"Gene FRAT1: {seq}")
 
 c.talk("Sending the FRAT1 Gene to the server, in fragment of 10 bases.")
 i = 0
-while i < 4:
+while i < 5:
     print(f"fragment {i+1}: {seq[i * 10 : (i + 1) * 10]}")
     c.talk(f"fragment {i+1}: {seq[i * 10 : (i + 1) * 10]}")
     i += 1
