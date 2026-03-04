@@ -4,6 +4,7 @@ from Seq1 import Seq
 PRACTICE = 2
 EXERCISE = 6
 
+
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
 c1 = Client("212.128.255.87", 8080)
