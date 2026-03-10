@@ -1,6 +1,8 @@
 from client0 import Client
 from Seq1 import Seq
 
+
+
 PRACTICE = 2
 EXERCISE = 4
 

@@ -57,6 +57,7 @@ while len(clients_data) < 5:
         # -- Print the received message
         print(f"Message received: {msg}")
 
+
         # -- Send a response message to the client
         response = f"ECHO: {msg}\n"
 
