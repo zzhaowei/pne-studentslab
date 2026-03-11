@@ -7,9 +7,8 @@ seq2 = "CAAGGTCCCCTTCTTCCTTTCCATTCCCGTCAGCTTCATTTCCCTAATCTCCGTACAAAT"
 seq3 = "CCCTAGCCTGACTCCCTTTCCTTTCCATCCTCACCAGACGCCCGCATGCCGGACCTCAAA"
 seq4 = "AGCGCAAACGCTAAAAACCGGTTGAGTTGACGCACGGAGAGAAGGGGTGTGTGGGTGGGT"
 seq_list = [seq0, seq1, seq2, seq3, seq4]
-# Configure the Server's IP and PORT
 PORT = 8080
-IP = "127.0.0.1" # this IP address is local, so only requests from the same machine are possible
+IP = "127.0.0.1"
 
 
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -41,9 +40,6 @@ while True:
     else:
 
         print("A client has connected to the server!")
-
-
-
 
         msg_raw = cs.recv(2048)
 
