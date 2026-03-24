@@ -1,5 +1,4 @@
 import socket
-from pathlib import Path
 class Client:
     def __init__(self, ip, port):
         self.ip = ip
