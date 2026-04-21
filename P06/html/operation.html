@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Operation: {{ op }}</h1>
+
+{% if op == "info" %}
+<p>Sequence: {{ result.sequence }}</p>
+<p>Total length: {{ result.length }}</p>
+
+<ul>
+{% for c in result.counts %}
+    <li>{{ c }}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+<p>{{ result.sequence }}</p>
+{% endif %}
+
+<a href="/">Back</a>
+</body>
+</html>
