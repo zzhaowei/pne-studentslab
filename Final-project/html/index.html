@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Ensembl processing server</title>
+      </head>
+      <body style="background-color: rgb(244,234,215);">
+        <h1 style="color: rgb(47,80,134);">Final project: browsing human and vergebrates genome</h1>
+        <h2 style="color: rgb(47,80,134);">Basic services</h2>
+        <h3 style="color: rgb(47,80,134);"> List of species in the database </h3>
+        <form action="listSpecies" method="get">
+          <!--input type="hidden" name="list_species"-->
+          Limit entries: <input type="number" name="spec_lim" min="1"><br>
+          Select name type: <select name="name_selection">
+            <option value="common_name"> Common name </option>
+            <option value="display_name"> Display name </option>
+            <option value="name"> Scientific name </option>
+          </select><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <br>
+        <h3 style="color: rgb(47,80,134);"> Information about the karyotype </h3>
+        <form action="karyotype" method="get">
+          <!--input type="hidden" name="karyotype"-->
+          Enter species:  <input type="text" name="species"/><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <br>
+        <h3 style="color: rgb(47,80,134);"> Chromosome length </h3>
+        <form action="chromosomeLength" method="get">
+          <!--input type="hidden" name="chromosome_len"-->
+          Enter species:&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="text" name="species"/><br>
+          Select chromosome: &nbsp <input type="text" name="chromosome"/><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <br>
+        <h2 style="color: rgb(47,80,134);">Medium services (species: human)</h2>
+        <h3 style="color: rgb(47,80,134);"> Gene Lookup </h3>
+        <form action="geneLookup" method="get">
+          Select gene: &nbsp &nbsp &nbsp <input type="text" name="gene"/><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <h3 style="color: rgb(47,80,134);"> Gene sequence </h3>
+        <form action="geneSeq" method="get">
+          Select gene: &nbsp &nbsp &nbsp <input type="text" name="gene"/><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <h3 style="color: rgb(47,80,134);"> Gene Information </h3>
+        <form action="geneInfo" method="get">
+          Select gene: &nbsp &nbsp &nbsp <input type="text" name="gene"/><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <h3 style="color: rgb(47,80,134);"> Gene Calculations </h3>
+        <form action="geneCalc" method="get">
+          Select gene: &nbsp &nbsp &nbsp <input type="text" name="gene"/><br>
+          <input type="submit" value="Request"/>
+        </form>
+        <h3 style="color: rgb(47,80,134);"> Gene Overlap </h3>
+        <form action="geneList" method="get">
+          Region: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="number" name="region"/><br>
+          Beginning:&nbsp &nbsp &nbsp &nbsp &nbsp <input type="number" name="start"/><br>
+          End:&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input type="number" name="end"/><br>
+          Select name type: &nbsp <select name="name_selection">
+            <option value="id"> Ensembl ID </option>
+            <option value="external_name"> External name </option>
+            <option value="logic_name"> Logic name </option>
+          </select><br>
+          <input type="submit" value="Request"/>
+        </form>
+      </body>
+    </html>
