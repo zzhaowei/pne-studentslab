@@ -265,6 +265,7 @@ class GenomeHandler(http.server.BaseHTTPRequestHandler):
                 "chromosomes": service.ens_data.get("karyotype", [])
             })
 
+
         elif path == "/chromosomeLength":
             species = params.get("species", "")
             chromosome = params.get("chromosome", "")
