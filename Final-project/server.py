@@ -129,7 +129,7 @@ class FinalProjectHandler(http.server.BaseHTTPRequestHandler):
             if 'species' in arguments: species = arguments['species'][0]
             else: species = ""
             
-            if 'chromosome' in arguments: chromosome = arguments['chromosome'][0]
+            if 'chromo' in arguments: chromosome = arguments['chromo'][0]
             else: chromosome = ""
 
             if not species or not chromosome:
@@ -138,7 +138,7 @@ class FinalProjectHandler(http.server.BaseHTTPRequestHandler):
 
             data = client.get_json(f"/info/assembly/{species.replace(' ', '%20')}")
             if not data or 'top_level_region' not in data:
-                self.send_error_html(f"Specant find : '{species}' .")
+                self.send_error_html(f"cant find species : '{species}' .")
                 return
 
             length = None
@@ -180,12 +180,12 @@ class FinalProjectHandler(http.server.BaseHTTPRequestHandler):
             else: gene = ""
 
             if not gene:
-                self.render_error("please enter a gene")
+                self.send_error_html( "please enter a gene")
                 return
 
             lookup_data = client.get_json(f"/lookup/symbol/human/{gene}")
             if not lookup_data or 'id' not in lookup_data:
-                self.render_error(f"Could not find stable ID for gene '{gene}'.")
+                self.send_error_html(f"Could not find stable ID for gene '{gene}'.")
                 return
             gene_id = lookup_data['id']
 
