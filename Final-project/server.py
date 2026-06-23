@@ -225,14 +225,16 @@ class FinalProjectHandler(http.server.BaseHTTPRequestHandler):
             seq_obj = Seq(raw_sequence)
             total_len = seq_obj.len()
             counts = seq_obj.count()
-            
-            metrics = {
-                "len": total_len,
-                "A": f"{(counts.get('A', 0) / total_len) * 100:.2f}%",
-                "C": f"{(counts.get('C', 0) / total_len) * 100:.2f}%",
-                "T": f"{(counts.get('T', 0) / total_len) * 100:.2f}%",
-                "G": f"{(counts.get('G', 0) / total_len) * 100:.2f}%"
-            }
+            try:
+                metrics = {
+                    "len": total_len,
+                    "A": f"{(counts.get('A', 0) / total_len) * 100:.2f}%",
+                    "C": f"{(counts.get('C', 0) / total_len) * 100:.2f}%",
+                    "T": f"{(counts.get('T', 0) / total_len) * 100:.2f}%",
+                    "G": f"{(counts.get('G', 0) / total_len) * 100:.2f}%"
+                }
+            except ZeroDivisionError:
+                self.send_error_html(f"there is a zero division error for the length.")
             
             template = self.read_html_file("geneCalc.html")
             rendered = template.render(metrics=metrics)
@@ -277,14 +279,14 @@ class FinalProjectHandler(http.server.BaseHTTPRequestHandler):
             else: end = ""
 
             if not chromo or not start or not end:
-                self.render_error("please enter chromosome/ start / end(all three).")
+                self.send_error_html("please enter chromosome/ start / end(all three).")
                 return
 
             endpoint = f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene"
             
             data = client.get_json(endpoint)
             if data is None:
-                self.render_error(f"Ensembl error or invalid chromosome '{chromo}:{start}-{end}'.")
+                self.send_error_html(f"Ensembl error or invalid chromosome '{chromo}:{start}-{end}'.")
                 return
 
             overlap_map = {}
