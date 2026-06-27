@@ -6,6 +6,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 import jinja2 as j
 
+
 PORT = 8080
 
 class Seq:
@@ -304,47 +305,80 @@ class FinalProjectHandler(http.server.BaseHTTPRequestHandler):
             rendered = template.render(overlap_map=overlap_map)
             self.send_html_response(rendered)
             return
-        elif path == '/compare_genes':
-            if 'g1' in arguments:
-                g1 = arguments['g1'][0].strip()
-            else:
-                g1 = ""
 
-            if 'g2' in arguments:
-                g2 = arguments['g2'][0].strip()
-            else:
-                g2 = ""
 
-            if not g1 or not g2 :
-                self.send_error_html("please enter gene1/ gene2.")
+        elif path == '/disease_explorer':
+            if 'gene_id' in arguments:
+                gene = arguments['gene_id'][0]
+            else:
+                gene = ""
+
+            if 'source' in arguments:
+                s = arguments['source'][0]
+            else:
+                s = ""
+
+            if not gene:
+                self.send_error_html("please enter a gene")
                 return
 
-            endpoint1 = f"/lookup/id/{g1}?expand=1"
-            endpoint2 = f"/lookup/id/{g2}?expand=1"
-
-
-
-            data1 = client.get_json(endpoint1)
-            data2 = client.get_json(endpoint2)
-
-            if data1 is None or data2 is None:
-                self.send_error_html(f"Ensembl error or invalid gene1/ gene2.")
+            data = client.get_json(f"/phenotype/gene/homo_sapiens/{gene}")
+            if not data:
+                self.send_error_html(f"Please enter a correct gene ID")
                 return
-            print (data1 and data2)
-            name1 = data1.get('display_name')
-            name2 = data2.get('display_name')
-            total_trans1 = data1.get('Transcript')
-            trans_num1 = len(total_trans1)
-            total_trans2 = data2.get('Transcript')
-            trans_num2 = len(total_trans2)
 
-            template = self.read_html_file("1.html")
-            rendered = template.render(name1 = name1, name2 = name2, num1 = trans_num1, num2 = trans_num2)
+
+
+            total_num = len(data)
+            dic = {}
+            source1 = ""
+            msg = ""
+
+            if s ==  "":
+                for item in data:
+                    description = item.get('description')
+                    source = item.get('source')
+                    if source not in source1:
+                        source1 = source1 + source + ", "
+                    else:
+                        source1 = source1
+
+                    dic[description] = source
+            else:
+                list = []
+                for item in data:
+
+                    source = item.get('source')
+                    if source not in list:
+                        list.append(source)
+                    else:
+                        list = list
+
+
+                    description = item.get('description')
+
+                    if s in list:
+                        dic[description]= s
+                        source1 = s
+                        msg  = ""
+                    else:
+
+                        source1 = "fakesource"
+                        msg = f"No record found for the source: {s}"
+
+
+
+
+
+            template = self.read_html_file("disease_explorer.html")
+            rendered = template.render(gene = gene, total_num = total_num, source = source1, dic = dic, msg = msg)
             self.send_html_response(rendered)
+            return
+
+
+
         else:
             self.send_error_html("Resource Endpoint non-existent. Check url parameters.")
-
-
 
 if __name__ == '__main__':
     socketserver.TCPServer.allow_reuse_address = True

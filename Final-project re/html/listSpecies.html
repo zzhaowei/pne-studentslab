@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Species Listings</title></head>
+<body style="background-color: rgb(244, 234,215); font-family: sans-serif; margin: 30px;">
+    <h2>List of species available in the database:</h2>
+    <div style='width: 600px; height: 300px; overflow: auto; border: 1px solid #bbb; padding: 10px; background-color: #eee;'>
+        {% for sp in species_list %}
+            <p>· {{ sp }}</p>
+        {% endfor %}
+    </div>
+
+    <br><a href="/">Back to Menu</a>
+</body>
+</html>
